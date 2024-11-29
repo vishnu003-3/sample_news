@@ -10,7 +10,6 @@ class ArticleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Access the date and format it
     final String formattedDate = formatDate(article.publishedAt.toString());
 
     return Scaffold(
@@ -22,7 +21,6 @@ class ArticleScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Article Image
             article.urlToImage != null
                 ? ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
@@ -40,8 +38,6 @@ class ArticleScreen extends StatelessWidget {
                     child: const Icon(Icons.image_not_supported),
                   ),
             const SizedBox(height: 16.0),
-
-            // Title
             Text(
               article.title ?? 'No Title',
               style: const TextStyle(
@@ -50,8 +46,6 @@ class ArticleScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8.0),
-
-            // Source and Published Date
             Row(
               children: [
                 Text(
@@ -72,8 +66,6 @@ class ArticleScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16.0),
-
-            // Content
             Text(
               article.content ?? 'No Content Available.',
               style: const TextStyle(
@@ -82,8 +74,6 @@ class ArticleScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20.0),
-
-            // Read More (if URL exists)
             if (article.url != null)
               GestureDetector(
                 onTap: () {
@@ -115,16 +105,9 @@ class ArticleScreen extends StatelessWidget {
     );
   }
 
-  // Function to format the date string
   String formatDate(String? date) {
     if (date == null) return 'Unknown Date';
     final DateTime parsedDate = DateTime.parse(date);
     return '${parsedDate.day}/${parsedDate.month}/${parsedDate.year}';
   }
-
-//   // Function to open the article URL in a browser
-//   void launchUrl(String url) {
-//     // Use the url_launcher package to launch the URL (you need to import it)
-//     // Example: launch(url);
-//   }
 }

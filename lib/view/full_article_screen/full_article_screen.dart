@@ -10,6 +10,7 @@ class FullArticleScreen extends StatefulWidget {
   _FullArticleScreenState createState() => _FullArticleScreenState();
 }
 
+
 class _FullArticleScreenState extends State<FullArticleScreen> {
   late WebViewController _controller;
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sample_news/utils/color_constants.dart';
 import 'package:sample_news/utils/image_constants.dart';
+import 'package:sample_news/view/bottom_main_screen/bottom_main_screen.dart';
 import 'package:sample_news/view/home_screen/home_screen.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -10,7 +11,7 @@ class SplashScreen extends StatelessWidget {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => HomeScreen(),
+            builder: (context) => MainScreen(),
           ));
     });
 

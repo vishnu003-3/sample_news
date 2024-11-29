@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_news/controller/home_screen_controller.dart';
+import 'package:sample_news/utils/color_constants.dart';
 import 'package:sample_news/view/news_details_screen/news_details_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -31,12 +32,11 @@ class _HomeScreenState extends State<HomeScreen>
     _tabController.addListener(() {
       if (_tabController.indexIsChanging) {
         final category = categories[_tabController.index];
-        // Trigger category news fetching when tab changes
+
         context.read<HomeScreenController>().getNews(category);
       }
     });
 
-    // Fetch initial news on startup (first category)
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<HomeScreenController>().getNews(categories[0]);
     });
@@ -54,7 +54,9 @@ class _HomeScreenState extends State<HomeScreen>
     return DefaultTabController(
       length: categories.length,
       child: Scaffold(
+        backgroundColor: ColorConstants.BackgroundColor,
         appBar: AppBar(
+          backgroundColor: ColorConstants.AccentTextColor,
           title: const Text('Top Headlines'),
           bottom: TabBar(
             controller: _tabController,
@@ -63,14 +65,12 @@ class _HomeScreenState extends State<HomeScreen>
                 .map((category) => Tab(text: category.toUpperCase()))
                 .toList(),
             onTap: (index) {
-              // Trigger category news fetching when tab changes
               context.read<HomeScreenController>().getNews(categories[index]);
             },
           ),
         ),
         body: Column(
           children: [
-            // Search Bar
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
@@ -87,7 +87,6 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
               ),
             ),
-            // News List
             Expanded(
               child: Consumer<HomeScreenController>(
                 builder: (context, homeController, child) {
@@ -120,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen>
                               vertical: 8.0, horizontal: 12.0),
                           padding: const EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: ColorConstants.CardBackgroundColor,
                             borderRadius: BorderRadius.circular(8.0),
                             boxShadow: [
                               BoxShadow(
@@ -133,7 +132,6 @@ class _HomeScreenState extends State<HomeScreen>
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // Image Section
                               article.urlToImage != null
                                   ? ClipRRect(
                                       borderRadius: BorderRadius.circular(8.0),
@@ -154,7 +152,6 @@ class _HomeScreenState extends State<HomeScreen>
                                       ),
                                     ),
                               const SizedBox(width: 12.0),
-                              // Text Section
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
